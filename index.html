@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Newspeak BigBro</title>
+    <style>
+        .chat {
+            max-width: 350px;
+            background: #F0F0F0;
+        }
+        .msgu {
+            background: #DBDBDB;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 10px 15px;
+            max-width: 75%;
+            display: inline-block;
+        }
+        .m {
+            text-align: right;
+        }
+        .msgm {
+            background: #007CFF;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 5px 15px;
+            display: inline-block;
+            max-width: 75%;
+        }
+        #msgs {
+            height: 500px;
+            overflow: auto;
+        }
+        .options {
+            display: flex;
+        }
+        .option {
+            flex-grow: 1;
+            margin: 5px 10px;
+            background: #0075F1;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.25em;
+            cursor: pointer;
+        }
+        .option:hover {
+            background: #0069D8;
+        }
+        .option:active {
+            background: #0056B1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Newspeak BigBro</h1>
+    <h2>BigBro "helps" you choose which word list you <s>should</s> <i>must</i> use in Newspeak.</h2>
+    <div class="chat">
+        <div id="msgs">
+        </div>
+        <hr>
+        <p>Select your response:</p>
+        <div class="options" id="options">
+            <span class="option" onclick="step1()">Hello</span>
+        </div>
+    </div>
+    <script>
+        function addMsg(msg, fromYou = true) {
+            var m = document.createElement('div');
+            var bubble = document.createElement('span');
+            if (fromYou) {
+                bubble.classList.add('msgm');
+                m.classList.add('m');
+            } else {
+                bubble.classList.add('msgu');
+                m.classList.add('u');
+            }
+            bubble.textContent = msg;
+            m.appendChild(bubble);
+            document.getElementById('msgs').appendChild(m);
+            var objDiv = document.getElementById("msgs");
+            objDiv.scrollTop = objDiv.scrollHeight;
+        }
+        function restart() {
+            document.getElementById('msgs').innerHTML = '';
+            addMsg("Hello, I'm Newspeak's word list selection chatbot, BigBro.", false);
+            document.getElementById('options').innerHTML = '<span class="option" onclick="doyouhavens()">Hello</span>';
+        }
+        restart();
+        function doyouhavens() {
+            addMsg("Hello");
+            addMsg("Is Newspeak currently installed on your phone?", false);
+            document.getElementById('options').innerHTML = '<span class="option" onclick="step1()">Yes, it is.</span><span class="option" onclick="installnewspeak()">No, it is not.</span>';
+        }
+        function installnewspeak() {
+            window.location.href = 'https://apps.apple.com/us/app/newspeak-language-improvement/id1670782599';
+        }
+        function step1() {
+            addMsg('Yes, it is.');
+            addMsg("Let's begin the selection process. What is your primary objective today?", false);
+            document.getElementById('options').innerHTML = '<span class="option" onclick="step1_2()">I want to stop swearing.</span><span class="option" onclick="step1_1()">I want to stop using potentially offensive language that\'s not swearing.</span>';
+        }
+        function step1_1() {
+            addMsg('I want to stop using potentially offensive language that\'s not swearing.');
+            addMsg('Okay. Thanks. Do you want to stop saying words like c**p or d**n or stuff like "crazy," "insane," or "businessman?"', false);
+            document.getElementById('options').innerHTML = '<span class="option" onclick="step1_2_2()">I want to stop saying words like c**p and d**n.</span><span class="option" onclick="step1_1_1()">I want to stop saying words such as "crazy," "insane," or "businessman."</span>';
+        }
+        function step1_1_1() {
+            addMsg('I want to stop saying words such as "crazy," "insane," or "businessman."');
+            addMsg('Do you also want to stop saying swear words such as "c**p" and "d**n" as well as "crazy?"', false);
+            document.getElementById('options').innerHTML = '<span class="option" onclick="step1_1_1_1()">I want to stop saying swear words as well.</span><span class="option" onclick="step1_1_1_2()">I just want to stop saying words such as "crazy," "insane," or "businessman."</span>';
+        }
+        function step1_1_1_1() {
+            addMsg('I want to stop saying swear words as well.');
+            addMsg('In that case, you\'re likely looking for the "EHLI + Sensitive" word list.', false);
+            addMsg('Goodbye!', false);
+            goodbye();
+        }
+        function step1_1_1_2() {
+            addMsg('I want to stop saying swear words as well.');
+            addMsg('In that case, you\'re likely looking for the "Stanford EHLI" word list.', false);
+            addMsg('Goodbye!', false);
+            goodbye();
+        }
+        function step1_2() {
+            addMsg('I want to stop swearing.');
+            addMsg('Okay. Thanks. Do you want to only stop saying the worst words but are fine saying stuff like c**p, d**n, or p**s?', false);
+            document.getElementById('options').innerHTML = '<span class="option" onclick="step1_2_1()">I\'m fine saying the more mild words, but I don\'t want to say the worst words.</span><span class="option" onclick="step1_2_2()">I want to completely stop swearing, including saying stuff like c**p or d**n.</span>';
+        }
+        function step1_2_1() {
+            addMsg('I\'m fine saying the more mild words, but I don\'t want to say the worst words.');
+            addMsg('In that case, you\'re probably looking for the Default or "Only the Worst" word list.', false);
+            addMsg('Goodbye!', false);
+            goodbye();
+        }
+        function step1_2_2() {
+            addMsg('I want to completely stop swearing, including saying stuff like c**p or d**n.');
+            addMsg('In that case, you\'re probably looking for the Sensitive list.', false);
+            addMsg('Goodbye!', false);
+            goodbye();
+        }
+        function goodbye() {
+            document.getElementById('options').innerHTML = '<span class="option" onclick="respondgb()">Goodbye!</span>';
+        }
+        function respondgb() {
+            addMsg('Goodbye!');
+            addMsg('Goodbye. Let me know if there\'s anything else I can help you with.', false);
+            document.getElementById('options').innerHTML = '<span class="option" onclick="restart()">Restart Conversation</span>';
+        }
+    </script>
+</body>
+</html>
